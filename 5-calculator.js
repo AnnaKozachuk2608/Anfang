@@ -1,64 +1,81 @@
 "use strict"
+function UpdateField(n) {
+  document.getElementById("privet").setAttribute("value", n);
+}
 
-// Левое число
-let left  = ""
-// Правое число
+let left =""
 let right = ""
-// Операция
-let next  = ""
+let next = ""
 
-//Эта функция вызывается каждый раз при
-//нажатии кнопки на калькуляторе;
-//с аргументом `n` дабы отличить нажатую кнопку
 function NumPressed(n){
-  if (n === "+"){
-    if (left === "") {
-      console.log("левое число еще не введено")
-    }
-    else {
-      next = "+";
-    }
+if (n==="+"){
+  if (left === "") {
+    console.log("false")
   }
-  else if (n==="-") {
-    //TODO Homework
+  else {
+    next = "+";
   }
-  else if (n === "=") {
-    // Проверяем, что оба числа и операция введены
-    if(left !== "" && right !== "" && next !== "")
-    {
-     if (next === "+")
-     {
-       let itog = Number(left) + Number(right);
-       //Отображаем `itog` заменяя им текст написанный в текстовом поле "privet"
-       document.getElementById("privet").setAttribute("value", itog);
-     }
-    }
-    else {
-      console.log ("Неверный ввод");
-
-    }
+}
+else if (n==="-") {
+  if (left === "") {
+    console.log("false")
   }
-  else if (n === "C") {
-    //TODO Homework
-  }
-  else { // Нажата кнопка с цифрой
-    if (next === "") {
-      // Ввод левого числа
-      left = left + n;
-    }
-    else {
-      // Ввод правого числа
-      right = right + n;
-    }
+  else {
+    next = "-";
   }
 }
 
-//(1) Эта функция возовется сразу после загруки веб-страницы в браузере
-function rechner(){
-  document.getElementById("privet").setAttribute("value", "Привет, как дела ?");
-  document.getElementById("privet").style.color="red";
+else if (n==="=") {
+  if(left !== "" && right !== "" && next !== "")
+  {
+   if (next === "+")
+   { 
+     let itog = Number(left) + Number(right);
+     UpdateField(itog);
+   }
+   if (next === "-")
+   { 
+     let itog = Number(left) - Number(right);
+     UpdateField(itog);
+   }
+  }
+  else { 
+    console.log ("false");
+
+  }
 }
 
-//Это (1) обеспечивается как раз следующей строчкой:
-window.onload=rechner;
+else if (n==="C") {
 
+ left = ""
+ right = ""
+ next = ""
+
+
+
+}
+else { 
+  if (next==="") {
+    left = left + n;
+  }
+  else {
+    right = right + n;
+  
+  }
+
+}
+if (n!=="=") {
+ UpdateField(left + " " + next + " " + right)
+}
+}
+
+
+
+
+
+/*function rechner(){
+document.getElementById("privet").setAttribute("value", "string");
+document.getElementById("privet").style.color="blue";
+console.log("hddf");
+}
+window.onload=rechner;*/
